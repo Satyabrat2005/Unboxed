@@ -5,7 +5,7 @@ import time
 app = Flask(__name__)
 app.secret_key = 'your_secret_key_here'
 
-# Load questions
+# 🧠 Create QuizEngine with empty/default CSV
 quiz = QuizEngine('mock_tests/jee_paper1.csv')
 
 # ⏱️ Timer helper function
@@ -41,9 +41,6 @@ def login():
 
         if reg_user and reg_user['username'] == username and reg_user['password'] == password:
             session['username'] = username
-            session['start_time'] = int(time.time())  # 🕒 Start timer here!
-            quiz.score = 0  # Reset quiz score
-            quiz.shuffle_questions()  # Optional: reshuffle on new login
             return redirect(url_for('dashboard'))
         else:
             return "❌ Invalid credentials", 401
@@ -56,6 +53,24 @@ def dashboard():
     if 'username' not in session:
         return redirect(url_for('login'))
     return render_template('dashboard.html', username=session['username'])
+
+# ✅ NEW: Start selected test
+@app.route('/start_test', methods=['POST'])
+def start_test():
+    if 'username' not in session:
+        return redirect(url_for('login'))
+
+    test_id = request.form.get('test_id')  # e.g., jee_paper1.csv
+    if test_id:
+        try:
+            quiz.load_questions(f'mock_tests/{test_id}')  # 🔁 dynamic loading
+            session['start_time'] = int(time.time())
+            quiz.score = 0
+            return redirect(url_for('quiz_question', qid=0))
+        except Exception as e:
+            return f"❌ Failed to load test: {e}", 500
+
+    return redirect(url_for('dashboard'))
 
 # ❓ Quiz per Question
 @app.route('/quiz/<int:qid>', methods=['GET', 'POST'])
