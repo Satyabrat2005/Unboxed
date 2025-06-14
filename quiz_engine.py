@@ -13,14 +13,22 @@ class QuizEngine:
 
     def get_question(self, index):
         row = self.df.loc[index]
-        options = eval(row['Options']) if isinstance(row['Options'], str) else row['Options']
+
+        # 🧠 Build options from OptionA–D
+        options = []
+        for opt in ['OptionA', 'OptionB', 'OptionC', 'OptionD']:
+            if pd.notna(row.get(opt)):
+                options.append(str(row[opt]))
+
         random.shuffle(options)
+
         return {
             "question": row['Question'],
             "options": options,
-            "answer": row['Answer']
+            "answer": row['CorrectOptions'].split(',')[0].strip()  # takes first correct answer
         }
 
     def check_answer(self, index, user_choice):
-        correct_answer = str(self.df.loc[index, 'Answer']).strip().lower()
+        # ✅ Compare against the first correct answer in CorrectOptions
+        correct_answer = self.df.loc[index, 'CorrectOptions'].split(',')[0].strip().lower()
         return str(user_choice).strip().lower() == correct_answer
