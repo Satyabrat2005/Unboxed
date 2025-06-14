@@ -25,6 +25,44 @@ def index():
         return redirect(url_for('quiz_question', qid=0))
     return render_template('welcome.html')
 
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password')
+        # ✅ Save in a real DB later; for now store in session
+        session['registered_user'] = {'username': username, 'password': password}
+        return redirect(url_for('login'))
+    return render_template('register.html')
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password')
+        reg_user = session.get('registered_user')
+
+        if reg_user and reg_user['username'] == username and reg_user['password'] == password:
+            session['username'] = username
+            return redirect(url_for('dashboard'))
+        else:
+            return "❌ Invalid credentials", 401
+
+    return render_template('login.html')
+
+@app.route('/dashboard')
+def dashboard():
+    if 'username' not in session:
+        return redirect(url_for('login'))
+
+    # In future: fetch available mock papers from DB or folder
+    return render_template('dashboard.html', username=session['username'])
+
+@app.route('/')
+def home():
+    return render_template('home.html')
+
+
 @app.route('/quiz/<int:qid>', methods=['GET', 'POST'])
 def quiz_question(qid):
     if get_time_left() <= 0:
@@ -54,6 +92,12 @@ def quiz_question(qid):
 def result():
     username = session.get('username', 'Guest')
     return render_template('result.html', name=username, score=quiz.score, total=quiz.total_questions)
+
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('home'))
+
 
 if __name__ == '__main__':
     app.run(debug=True)
