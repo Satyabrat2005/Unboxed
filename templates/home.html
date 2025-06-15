@@ -1,10 +1,152 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
   <title>Welcome to Unboxed</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0f4f8;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: #fff;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: flex-end;
+      gap: 20px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      z-index: 10;
+    }
+
+    header a {
+      text-decoration: none;
+      color: #007bff;
+      font-weight: bold;
+    }
+
+    section {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .hero {
+      font-size: 5rem;
+      font-weight: bold;
+      animation: dropFromMiddle 2s forwards;
+      position: absolute;
+      top: 40%;
+    }
+
+    @keyframes dropFromMiddle {
+      0% {
+        opacity: 0;
+        transform: scale(0.5);
+        top: 50%;
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+        top: 10%;
+      }
+    }
+
+    .letter-slide {
+      font-size: 6rem;
+      font-weight: bold;
+      opacity: 0;
+      transform: translateY(-100px);
+      transition: all 0.6s ease-in-out;
+    }
+
+    .active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .description {
+      margin-top: 1rem;
+      font-size: 1.5rem;
+      opacity: 0;
+      transition: all 0.5s ease;
+      text-align: center;
+      max-width: 700px;
+    }
+
+    .description.active {
+      opacity: 1;
+    }
+  </style>
 </head>
 <body>
-  <h1>🧠 Unboxed - Crack Your Mock Tests</h1>
-  <a href="/login">Login</a> | <a href="/register">Register</a>
+
+<header>
+  <a href="/login">Login</a>
+  <a href="/register">Register</a>
+</header>
+
+<section id="landing">
+  <div class="hero" id="heroText">UNBOXED</div>
+</section>
+
+<section id="letters">
+  <div id="letterBox">
+    <div class="letter-slide" id="letter-U">U = Understanding</div>
+    <div class="description" id="desc-U">Empowering students with smart quizzes and analytics.</div>
+
+    <div class="letter-slide" id="letter-N">N = Navigation</div>
+    <div class="description" id="desc-N">Navigate your concepts faster with mock tests.</div>
+
+    <div class="letter-slide" id="letter-B">B = Brilliance</div>
+    <div class="description" id="desc-B">We unlock brilliance through practice.</div>
+
+    <div class="letter-slide" id="letter-O">O = Optimization</div>
+    <div class="description" id="desc-O">Optimize your efforts with detailed results.</div>
+
+    <div class="letter-slide" id="letter-X">X = X-Factor</div>
+    <div class="description" id="desc-X">What sets you apart is what we nurture.</div>
+
+    <div class="letter-slide" id="letter-E">E = Execution</div>
+    <div class="description" id="desc-E">From mock to mastery, we guide your execution.</div>
+
+    <div class="letter-slide" id="letter-D">D = Dedication</div>
+    <div class="description" id="desc-D">We honor your dedication to growth.</div>
+  </div>
+</section>
+
+<script>
+  const options = {
+    threshold: 0.5
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        entry.target.classList.add('active');
+        const desc = document.getElementById('desc-' + id.split('-')[1]);
+        if (desc) desc.classList.add('active');
+      }
+    });
+  }, options);
+
+  document.querySelectorAll('.letter-slide').forEach(el => observer.observe(el));
+</script>
+
 </body>
 </html>
