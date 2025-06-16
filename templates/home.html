@@ -39,56 +39,35 @@
     section {
       height: 100vh;
       display: flex;
-      justify-content: center;
       align-items: center;
-      flex-direction: column;
-      position: relative;
-    }
-
-    .hero {
-      font-size: 5rem;
-      font-weight: bold;
-      animation: dropFromMiddle 2s forwards;
-      position: absolute;
-      top: 40%;
-    }
-
-    @keyframes dropFromMiddle {
-      0% {
-        opacity: 0;
-        transform: scale(0.5);
-        top: 50%;
-      }
-      100% {
-        opacity: 1;
-        transform: scale(1);
-        top: 10%;
-      }
-    }
-
-    .letter-slide {
-      font-size: 6rem;
-      font-weight: bold;
+      justify-content: space-between;
+      padding: 0 5vw;
       opacity: 0;
-      transform: translateY(100px);
-      transition: all 0.8s ease-in-out;
-      position: absolute;
+      transform: scale(0.95);
+      transition: all 0.8s ease;
+    }
+
+    section.active {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .letter {
+      font-size: 18vw;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .keyword {
+      font-size: 2vw;
+      font-weight: 600;
+      color: #007bff;
     }
 
     .description {
-      margin-top: 1rem;
-      font-size: 1.5rem;
-      opacity: 0;
-      transition: all 0.8s ease;
-      text-align: center;
-      max-width: 700px;
-      position: relative;
-    }
-
-    .letter-slide.active,
-    .description.active {
-      opacity: 1;
-      transform: translateY(0);
+      font-size: 1.2vw;
+      max-width: 40vw;
+      color: #444;
     }
   </style>
 </head>
@@ -99,63 +78,78 @@
   <a href="/register">Register</a>
 </header>
 
-<section id="landing">
-  <div class="hero" id="heroText">UNBOXED</div>
+<section class="active" style="justify-content: center; text-align: center; flex-direction: column;">
+  <div class="letter">UNBOXED</div>
 </section>
 
-<section id="letter-U" class="letter-section">
-  <div class="letter-slide">U = Understanding</div>
-  <div class="description">Empowering students with smart quizzes and analytics.</div>
+<section id="U">
+  <div class="letter">U</div>
+  <div style="flex-direction: column; text-align: left;">
+    <div class="keyword">= Understanding</div>
+    <div class="description">Empowering students with smart quizzes and analytics.</div>
+  </div>
 </section>
 
-<section id="letter-N" class="letter-section">
-  <div class="letter-slide">N = Navigation</div>
-  <div class="description">Navigate your concepts faster with mock tests.</div>
+<section id="N">
+  <div style="flex-direction: column; text-align: right;">
+    <div class="keyword">= Navigation</div>
+    <div class="description">Navigate your concepts faster with mock tests.</div>
+  </div>
+  <div class="letter">N</div>
 </section>
 
-<section id="letter-B" class="letter-section">
-  <div class="letter-slide">B = Brilliance</div>
-  <div class="description">We unlock brilliance through practice.</div>
+<section id="B">
+  <div class="letter">B</div>
+  <div style="flex-direction: column; text-align: left;">
+    <div class="keyword">= Brilliance</div>
+    <div class="description">We unlock brilliance through practice.</div>
+  </div>
 </section>
 
-<section id="letter-O" class="letter-section">
-  <div class="letter-slide">O = Optimization</div>
-  <div class="description">Optimize your efforts with detailed results.</div>
+<section id="O">
+  <div style="flex-direction: column; text-align: right;">
+    <div class="keyword">= Optimization</div>
+    <div class="description">Optimize your efforts with detailed results.</div>
+  </div>
+  <div class="letter">O</div>
 </section>
 
-<section id="letter-X" class="letter-section">
-  <div class="letter-slide">X = X-Factor</div>
-  <div class="description">What sets you apart is what we nurture.</div>
+<section id="X">
+  <div class="letter">X</div>
+  <div style="flex-direction: column; text-align: left;">
+    <div class="keyword">= X-Factor</div>
+    <div class="description">What sets you apart is what we nurture.</div>
+  </div>
 </section>
 
-<section id="letter-E" class="letter-section">
-  <div class="letter-slide">E = Execution</div>
-  <div class="description">From mock to mastery, we guide your execution.</div>
+<section id="E">
+  <div style="flex-direction: column; text-align: right;">
+    <div class="keyword">= Execution</div>
+    <div class="description">From mock to mastery, we guide your execution.</div>
+  </div>
+  <div class="letter">E</div>
 </section>
 
-<section id="letter-D" class="letter-section">
-  <div class="letter-slide">D = Dedication</div>
-  <div class="description">We honor your dedication to growth.</div>
+<section id="D">
+  <div class="letter">D</div>
+  <div style="flex-direction: column; text-align: left;">
+    <div class="keyword">= Dedication</div>
+    <div class="description">We honor your dedication to growth.</div>
+  </div>
 </section>
 
 <script>
-  const observerOptions = {
-    threshold: 0.6
-  };
-
-  const observer = new IntersectionObserver((entries) => {
+  const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        entry.target.querySelector('.letter-slide').classList.add('active');
-        entry.target.querySelector('.description').classList.add('active');
+        entry.target.classList.add('active');
       } else {
-        entry.target.querySelector('.letter-slide').classList.remove('active');
-        entry.target.querySelector('.description').classList.remove('active');
+        entry.target.classList.remove('active');
       }
     });
-  }, observerOptions);
+  }, { threshold: 0.4 });
 
-  document.querySelectorAll('.letter-section').forEach(section => {
+  document.querySelectorAll('section').forEach(section => {
     observer.observe(section);
   });
 </script>
