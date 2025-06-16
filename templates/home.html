@@ -70,26 +70,25 @@
       font-size: 6rem;
       font-weight: bold;
       opacity: 0;
-      transform: translateY(-100px);
-      transition: all 0.6s ease-in-out;
-    }
-
-    .active {
-      opacity: 1;
-      transform: translateY(0);
+      transform: translateY(100px);
+      transition: all 0.8s ease-in-out;
+      position: absolute;
     }
 
     .description {
       margin-top: 1rem;
       font-size: 1.5rem;
       opacity: 0;
-      transition: all 0.5s ease;
+      transition: all 0.8s ease;
       text-align: center;
       max-width: 700px;
+      position: relative;
     }
 
+    .letter-slide.active,
     .description.active {
       opacity: 1;
+      transform: translateY(0);
     }
   </style>
 </head>
@@ -104,48 +103,61 @@
   <div class="hero" id="heroText">UNBOXED</div>
 </section>
 
-<section id="letters">
-  <div id="letterBox">
-    <div class="letter-slide" id="letter-U">U = Understanding</div>
-    <div class="description" id="desc-U">Empowering students with smart quizzes and analytics.</div>
+<section id="letter-U" class="letter-section">
+  <div class="letter-slide">U = Understanding</div>
+  <div class="description">Empowering students with smart quizzes and analytics.</div>
+</section>
 
-    <div class="letter-slide" id="letter-N">N = Navigation</div>
-    <div class="description" id="desc-N">Navigate your concepts faster with mock tests.</div>
+<section id="letter-N" class="letter-section">
+  <div class="letter-slide">N = Navigation</div>
+  <div class="description">Navigate your concepts faster with mock tests.</div>
+</section>
 
-    <div class="letter-slide" id="letter-B">B = Brilliance</div>
-    <div class="description" id="desc-B">We unlock brilliance through practice.</div>
+<section id="letter-B" class="letter-section">
+  <div class="letter-slide">B = Brilliance</div>
+  <div class="description">We unlock brilliance through practice.</div>
+</section>
 
-    <div class="letter-slide" id="letter-O">O = Optimization</div>
-    <div class="description" id="desc-O">Optimize your efforts with detailed results.</div>
+<section id="letter-O" class="letter-section">
+  <div class="letter-slide">O = Optimization</div>
+  <div class="description">Optimize your efforts with detailed results.</div>
+</section>
 
-    <div class="letter-slide" id="letter-X">X = X-Factor</div>
-    <div class="description" id="desc-X">What sets you apart is what we nurture.</div>
+<section id="letter-X" class="letter-section">
+  <div class="letter-slide">X = X-Factor</div>
+  <div class="description">What sets you apart is what we nurture.</div>
+</section>
 
-    <div class="letter-slide" id="letter-E">E = Execution</div>
-    <div class="description" id="desc-E">From mock to mastery, we guide your execution.</div>
+<section id="letter-E" class="letter-section">
+  <div class="letter-slide">E = Execution</div>
+  <div class="description">From mock to mastery, we guide your execution.</div>
+</section>
 
-    <div class="letter-slide" id="letter-D">D = Dedication</div>
-    <div class="description" id="desc-D">We honor your dedication to growth.</div>
-  </div>
+<section id="letter-D" class="letter-section">
+  <div class="letter-slide">D = Dedication</div>
+  <div class="description">We honor your dedication to growth.</div>
 </section>
 
 <script>
-  const options = {
-    threshold: 0.5
+  const observerOptions = {
+    threshold: 0.6
   };
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        const id = entry.target.id;
-        entry.target.classList.add('active');
-        const desc = document.getElementById('desc-' + id.split('-')[1]);
-        if (desc) desc.classList.add('active');
+        entry.target.querySelector('.letter-slide').classList.add('active');
+        entry.target.querySelector('.description').classList.add('active');
+      } else {
+        entry.target.querySelector('.letter-slide').classList.remove('active');
+        entry.target.querySelector('.description').classList.remove('active');
       }
     });
-  }, options);
+  }, observerOptions);
 
-  document.querySelectorAll('.letter-slide').forEach(el => observer.observe(el));
+  document.querySelectorAll('.letter-section').forEach(section => {
+    observer.observe(section);
+  });
 </script>
 
 </body>
