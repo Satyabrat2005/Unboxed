@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <title>Welcome to Unboxed</title>
+  <meta name="theme-color" content="#000000">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
@@ -10,142 +12,246 @@
       box-sizing: border-box;
     }
 
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #f0f4f8;
-      overflow-x: hidden;
+    html {
+      scroll-snap-type: y mandatory;
       scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Orbitron', sans-serif;
+      background: #000;
+      color: #fff;
+      overflow-x: hidden;
     }
 
     header {
       position: fixed;
       top: 0;
       width: 100%;
-      background: #fff;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(10px);
       padding: 1rem 2rem;
       display: flex;
-      justify-content: flex-end;
-      gap: 20px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      justify-content: space-between;
+      align-items: center;
       z-index: 10;
     }
 
-    header a {
+    header .logo {
+      font-size: 1.5rem;
+      color: #ff1744;
+    }
+
+    nav a {
       text-decoration: none;
-      color: #007bff;
+      color: #ff1744;
+      margin-left: 20px;
       font-weight: bold;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #ff5252;
     }
 
     section {
       height: 100vh;
       display: flex;
-      justify-content: center;
       align-items: center;
-      flex-direction: column;
-      position: relative;
-    }
-
-    .hero {
-      font-size: 5rem;
-      font-weight: bold;
-      animation: dropFromMiddle 2s forwards;
-      position: absolute;
-      top: 40%;
-    }
-
-    @keyframes dropFromMiddle {
-      0% {
-        opacity: 0;
-        transform: scale(0.5);
-        top: 50%;
-      }
-      100% {
-        opacity: 1;
-        transform: scale(1);
-        top: 10%;
-      }
-    }
-
-    .letter-slide {
-      font-size: 6rem;
-      font-weight: bold;
+      justify-content: space-between;
+      padding: 0 5vw;
       opacity: 0;
-      transform: translateY(-100px);
-      transition: all 0.6s ease-in-out;
+      transform: scale(0.95);
+      transition: all 0.8s ease;
+      scroll-snap-align: start;
+      background: linear-gradient(135deg, #000000, #1c1c1c);
     }
 
-    .active {
+    section.active {
       opacity: 1;
-      transform: translateY(0);
+      transform: scale(1);
+    }
+
+    .letter {
+      font-size: 18vw;
+      font-weight: bold;
+      color: #ff1744;
+      transition: transform 0.3s ease;
+    }
+
+    .letter:hover {
+      transform: scale(1.1);
+      text-shadow: 0 0 10px #ff1744;
+    }
+
+    .keyword {
+      font-size: 2vw;
+      font-weight: 600;
+      color: #ff5252;
     }
 
     .description {
-      margin-top: 1rem;
-      font-size: 1.5rem;
-      opacity: 0;
-      transition: all 0.5s ease;
-      text-align: center;
-      max-width: 700px;
+      font-size: 1.2vw;
+      max-width: 40vw;
+      color: #eeeeee;
     }
 
-    .description.active {
-      opacity: 1;
+    .bg-u { background: linear-gradient(135deg, #0f0f0f, #330000); }
+    .bg-n { background: linear-gradient(135deg, #330000, #4a0000); }
+    .bg-b { background: linear-gradient(135deg, #4a0000, #660000); }
+    .bg-o { background: linear-gradient(135deg, #660000, #800000); }
+    .bg-x { background: linear-gradient(135deg, #800000, #990000); }
+    .bg-e { background: linear-gradient(135deg, #990000, #b30000); }
+    .bg-d { background: linear-gradient(135deg, #b30000, #cc0000); }
+
+    .features-section {
+      background: #111;
+      padding: 60px 10vw;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .features-section h2 {
+      font-size: 3vw;
+      margin-bottom: 20px;
+      color: #ff5252;
+    }
+
+    .features-container {
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .feature-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(5px);
+      border-radius: 12px;
+      padding: 20px;
+      width: 250px;
+      color: #fff;
+      transition: transform 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 20px rgba(255, 23, 68, 0.5);
     }
   </style>
 </head>
 <body>
 
 <header>
-  <a href="/login">Login</a>
-  <a href="/register">Register</a>
+  <div class="logo">UNBOXED</div>
+  <nav>
+    <a href="#U">About</a>
+    <a href="#B">Features</a>
+    <a href="#X">X-Factor</a>
+    <a href="login.html">Login</a>
+    <a href="register.html">Register</a>
+  </nav>
 </header>
 
-<section id="landing">
-  <div class="hero" id="heroText">UNBOXED</div>
+<section class="bg-u active" style="justify-content: center; text-align: center; flex-direction: column;">
+  <div class="letter">UNBOXED</div>
 </section>
 
-<section id="letters">
-  <div id="letterBox">
-    <div class="letter-slide" id="letter-U">U = Understanding</div>
-    <div class="description" id="desc-U">Empowering students with smart quizzes and analytics.</div>
+<section id="U" class="bg-u">
+  <div class="letter">U</div>
+  <div style="flex-direction: column; text-align: left;">
+    <div class="keyword">= Understanding</div>
+    <div class="description">Empowering students with smart quizzes and analytics.</div>
+  </div>
+</section>
 
-    <div class="letter-slide" id="letter-N">N = Navigation</div>
-    <div class="description" id="desc-N">Navigate your concepts faster with mock tests.</div>
+<section id="N" class="bg-n">
+  <div style="flex-direction: column; text-align: right;">
+    <div class="keyword">= Navigation</div>
+    <div class="description">Navigate your concepts faster with mock tests.</div>
+  </div>
+  <div class="letter">N</div>
+</section>
 
-    <div class="letter-slide" id="letter-B">B = Brilliance</div>
-    <div class="description" id="desc-B">We unlock brilliance through practice.</div>
+<section id="B" class="bg-b">
+  <div class="letter">B</div>
+  <div style="flex-direction: column; text-align: left;">
+    <div class="keyword">= Brilliance</div>
+    <div class="description">We unlock brilliance through practice.</div>
+  </div>
+</section>
 
-    <div class="letter-slide" id="letter-O">O = Optimization</div>
-    <div class="description" id="desc-O">Optimize your efforts with detailed results.</div>
+<section id="O" class="bg-o">
+  <div style="flex-direction: column; text-align: right;">
+    <div class="keyword">= Optimization</div>
+    <div class="description">Optimize your efforts with detailed results.</div>
+  </div>
+  <div class="letter">O</div>
+</section>
 
-    <div class="letter-slide" id="letter-X">X = X-Factor</div>
-    <div class="description" id="desc-X">What sets you apart is what we nurture.</div>
+<section id="X" class="bg-x">
+  <div class="letter">X</div>
+  <div style="flex-direction: column; text-align: left;">
+    <div class="keyword">= X-Factor</div>
+    <div class="description">What sets you apart is what we nurture.</div>
+  </div>
+</section>
 
-    <div class="letter-slide" id="letter-E">E = Execution</div>
-    <div class="description" id="desc-E">From mock to mastery, we guide your execution.</div>
+<section id="E" class="bg-e">
+  <div style="flex-direction: column; text-align: right;">
+    <div class="keyword">= Execution</div>
+    <div class="description">From mock to mastery, we guide your execution.</div>
+  </div>
+  <div class="letter">E</div>
+</section>
 
-    <div class="letter-slide" id="letter-D">D = Dedication</div>
-    <div class="description" id="desc-D">We honor your dedication to growth.</div>
+<section id="D" class="bg-d">
+  <div class="letter">D</div>
+  <div style="flex-direction: column; text-align: left;">
+    <div class="keyword">= Dedication</div>
+    <div class="description">We honor your dedication to growth.</div>
+  </div>
+</section>
+
+<section class="features-section">
+  <h2>⚡ Key Features</h2>
+  <div class="features-container">
+    <div class="feature-card">
+      <h3>AI Mock Engine</h3>
+      <p>Adaptive quizzes based on your learning pattern.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Smart Feedback</h3>
+      <p>Instant analytics on your performance per section.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Timer & Rank</h3>
+      <p>Simulates real-time exam pressure with leaderboard.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Interactive UI</h3>
+      <p>Gaming-inspired scrolls and animations for engagement.</p>
+    </div>
   </div>
 </section>
 
 <script>
-  const options = {
-    threshold: 0.5
-  };
-
-  const observer = new IntersectionObserver((entries) => {
+  const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        const id = entry.target.id;
         entry.target.classList.add('active');
-        const desc = document.getElementById('desc-' + id.split('-')[1]);
-        if (desc) desc.classList.add('active');
+      } else {
+        entry.target.classList.remove('active');
       }
     });
-  }, options);
+  }, { threshold: 0.4 });
 
-  document.querySelectorAll('.letter-slide').forEach(el => observer.observe(el));
+  document.querySelectorAll('section').forEach(section => {
+    observer.observe(section);
+  });
 </script>
 
 </body>
