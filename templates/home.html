@@ -28,8 +28,8 @@
       position: fixed;
       top: 0;
       width: 100%;
-      background: rgba(0, 0, 0, 0.6);
-      backdrop-filter: blur(10px);
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(8px);
       padding: 1rem 2rem;
       display: flex;
       justify-content: space-between;
@@ -39,19 +39,19 @@
 
     header .logo {
       font-size: 1.5rem;
-      color: #ff1744;
+      color: #ff3b3b;
     }
 
     nav a {
       text-decoration: none;
-      color: #ff1744;
+      color: #ff3b3b;
       margin-left: 20px;
       font-weight: bold;
       transition: color 0.3s ease;
     }
 
     nav a:hover {
-      color: #ff5252;
+      color: #ff6b6b;
     }
 
     section {
@@ -64,7 +64,7 @@
       transform: scale(0.95);
       transition: all 0.8s ease;
       scroll-snap-align: start;
-      background: linear-gradient(135deg, #000000, #1c1c1c);
+      background: linear-gradient(135deg, #111, #1a1a1a);
     }
 
     section.active {
@@ -75,37 +75,37 @@
     .letter {
       font-size: 18vw;
       font-weight: bold;
-      color: #ff1744;
+      color: #ff3b3b;
       transition: transform 0.3s ease;
     }
 
     .letter:hover {
       transform: scale(1.1);
-      text-shadow: 0 0 10px #ff1744;
+      text-shadow: 0 0 10px #ff3b3b;
     }
 
     .keyword {
       font-size: 2vw;
       font-weight: 600;
-      color: #ff5252;
+      color: #ff6b6b;
     }
 
     .description {
       font-size: 1.2vw;
       max-width: 40vw;
-      color: #eeeeee;
+      color: #dddddd;
     }
 
-    .bg-u { background: linear-gradient(135deg, #0f0f0f, #330000); }
-    .bg-n { background: linear-gradient(135deg, #330000, #4a0000); }
-    .bg-b { background: linear-gradient(135deg, #4a0000, #660000); }
-    .bg-o { background: linear-gradient(135deg, #660000, #800000); }
-    .bg-x { background: linear-gradient(135deg, #800000, #990000); }
-    .bg-e { background: linear-gradient(135deg, #990000, #b30000); }
-    .bg-d { background: linear-gradient(135deg, #b30000, #cc0000); }
+    .bg-u { background: linear-gradient(135deg, #111111, #1b0000); }
+    .bg-n { background: linear-gradient(135deg, #1b0000, #2a0000); }
+    .bg-b { background: linear-gradient(135deg, #2a0000, #330000); }
+    .bg-o { background: linear-gradient(135deg, #330000, #3d0000); }
+    .bg-x { background: linear-gradient(135deg, #3d0000, #4d0000); }
+    .bg-e { background: linear-gradient(135deg, #4d0000, #5c0000); }
+    .bg-d { background: linear-gradient(135deg, #5c0000, #6a0000); }
 
     .features-section {
-      background: #111;
+      background: #101010;
       padding: 60px 10vw;
       display: flex;
       flex-direction: column;
@@ -116,7 +116,7 @@
     .features-section h2 {
       font-size: 3vw;
       margin-bottom: 20px;
-      color: #ff5252;
+      color: #ff6b6b;
     }
 
     .features-container {
@@ -127,9 +127,9 @@
     }
 
     .feature-card {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(5px);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(4px);
       border-radius: 12px;
       padding: 20px;
       width: 250px;
@@ -139,7 +139,7 @@
 
     .feature-card:hover {
       transform: translateY(-5px);
-      box-shadow: 0 0 20px rgba(255, 23, 68, 0.5);
+      box-shadow: 0 0 20px rgba(255, 23, 68, 0.4);
     }
   </style>
 </head>
@@ -151,8 +151,8 @@
     <a href="#U">About</a>
     <a href="#B">Features</a>
     <a href="#X">X-Factor</a>
-    <a href="login.html">Login</a>
-    <a href="register.html">Register</a>
+    <a href="/login">Login</a>
+    <a href="/register">Register</a>
   </nav>
 </header>
 
