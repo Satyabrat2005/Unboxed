@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Quiz In Progress</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- ✅ MathJax Configuration for Inline and Block Math -->
   <script>
@@ -12,9 +13,7 @@
         displayMath: [['$$', '$$']],
         processEscapes: true
       },
-      svg: {
-        fontCache: 'global'
-      }
+      svg: { fontCache: 'global' }
     };
   </script>
 
@@ -26,47 +25,165 @@
   </script>
 
   <style>
-    body { display: flex; font-family: Arial; margin: 0; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #0b0b0b;
+      font-family: 'Segoe UI', sans-serif;
+      color: #fff;
+    }
+
+    #fullscreen-warning {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #ff1744;
+      padding: 20px;
+      border-radius: 10px;
+      color: white;
+      z-index: 999;
+    }
+
     #sidebar {
-      width: 20%; background: #eee; padding: 20px;
-      height: 100vh; overflow-y: auto;
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 20vw;
+      height: 100vh;
+      background: #111;
+      padding: 20px;
+      overflow-y: auto;
+      border-right: 1px solid #222;
     }
+
     #main {
-      flex: 1; padding: 30px;
+      margin-left: 20vw;
+      padding: 3vh 5vw;
     }
+
+    .q-nav-section {
+      margin-bottom: 30px;
+    }
+
+    .q-nav-section h4 {
+      margin-bottom: 10px;
+      color: #ff5252;
+      border-bottom: 1px solid #333;
+      padding-bottom: 5px;
+    }
+
     .q-nav-btn {
-      width: 30px; height: 30px; margin: 5px;
-      display: inline-block; text-align: center;
-      line-height: 30px; background: lightgray;
+      width: 30px;
+      height: 30px;
+      margin: 3px;
+      display: inline-block;
+      text-align: center;
+      line-height: 30px;
+      background: #444;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .q-nav-btn.answered {
+      background: #4caf50;
+      color: white;
+    }
+
+    #timer {
+      position: fixed;
+      top: 10px;
+      right: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #ff1744;
+    }
+
+    .question-box {
+      background: #1a1a1a;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(255, 23, 68, 0.3);
+      animation: fadeIn 0.8s ease;
+    }
+
+    .question-box h2 {
+      font-size: 20px;
+      margin-bottom: 20px;
+      color: #ff5252;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 12px;
+      font-size: 16px;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #ff1744;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
       cursor: pointer;
     }
-    .answered {
-      background: green; color: white;
+
+    button:hover {
+      background: #ff5252;
     }
-    #timer {
-      position: fixed; top: 10px; right: 20px;
-      font-size: 18px; color: red; font-weight: bold;
-    }
+
     img.question-img {
       max-width: 400px;
       margin: 10px 0;
       display: block;
     }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
   </style>
 </head>
-<body>
+<body onfullscreenchange="checkFullscreen()">
 
-  <div id="sidebar">
-    <h3>{{ username }}</h3>
-    {% for i in range(total) %}
+<div id="fullscreen-warning">⚠️ Test auto-submitted due to exiting fullscreen.</div>
+
+<div id="sidebar">
+  <h3>{{ username }}</h3>
+  <div class="q-nav-section">
+    <h4>Physics</h4>
+    {% for i in range(0, 30) %}
       <div class="q-nav-btn" onclick="goToQ({{ i }})" id="nav-q{{ i }}">{{ i+1 }}</div>
     {% endfor %}
   </div>
+  <div class="q-nav-section">
+    <h4>Chemistry</h4>
+    {% for i in range(30, 60) %}
+      <div class="q-nav-btn" onclick="goToQ({{ i }})" id="nav-q{{ i }}">{{ i+1 }}</div>
+    {% endfor %}
+  </div>
+  <div class="q-nav-section">
+    <h4>Mathematics</h4>
+    {% for i in range(60, 90) %}
+      <div class="q-nav-btn" onclick="goToQ({{ i }})" id="nav-q{{ i }}">{{ i+1 }}</div>
+    {% endfor %}
+  </div>
+</div>
 
-  <div id="main">
-    <div id="timer">Loading...</div>
-
-    <form id="quiz-form" method="POST">
+<div id="main">
+  <div id="timer">Loading...</div>
+  <form id="quiz-form" method="POST">
+    <div class="question-box">
       <h2>Q{{ qid+1 }}: <span>{{ question.question | safe }}</span></h2>
 
       {% if question.image %}
@@ -75,43 +192,50 @@
 
       {% for option in question.options %}
         <label>
-          <input type="radio" name="option" value="{{ option }}">
+          <input type="radio" name="option" value="{{ option }}" onchange="markAnswered({{ qid }})">
           <span>{{ option | safe }}</span>
-        </label><br>
+        </label>
       {% endfor %}
 
-      <br>
       <button type="submit">Next</button>
-    </form>
-  </div>
+    </div>
+  </form>
+</div>
 
-  <script>
-    let duration = {{ time_left }};
-    const timerDiv = document.getElementById("timer");
-
-    function countdown() {
-      let h = Math.floor(duration / 3600);
-      let m = Math.floor((duration % 3600) / 60);
-      let s = duration % 60;
-      timerDiv.textContent = `${h.toString().padStart(2,'0')}:${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
-      duration--;
-      if (duration < 0) {
-        alert("⏰ Time's up! Auto-submitting...");
+<script>
+  function checkFullscreen() {
+    if (!document.fullscreenElement) {
+      document.getElementById("fullscreen-warning").style.display = "block";
+      setTimeout(() => {
         document.getElementById("quiz-form").submit();
-      } else {
-        setTimeout(countdown, 1000);
-      }
+      }, 1500);
     }
-    countdown();
+  }
 
-    function markAnswered(qid) {
-      document.getElementById("nav-q" + qid).classList.add("answered");
+  let duration = {{ time_left }};
+  const timerDiv = document.getElementById("timer");
+  function countdown() {
+    let h = Math.floor(duration / 3600);
+    let m = Math.floor((duration % 3600) / 60);
+    let s = duration % 60;
+    timerDiv.textContent = `${h.toString().padStart(2,'0')}:${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
+    duration--;
+    if (duration < 0) {
+      alert("⏰ Time's up! Auto-submitting...");
+      document.getElementById("quiz-form").submit();
+    } else {
+      setTimeout(countdown, 1000);
     }
+  }
+  countdown();
 
-    function goToQ(qid) {
-      window.location.href = "/quiz/" + qid;
-    }
-  </script>
+  function markAnswered(qid) {
+    document.getElementById("nav-q" + qid).classList.add("answered");
+  }
+  function goToQ(qid) {
+    window.location.href = "/quiz/" + qid;
+  }
+</script>
 
 </body>
 </html>
