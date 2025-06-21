@@ -1,41 +1,77 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Dashboard</title>
+  <title>UNBOXED Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      padding: 40px;
-      background: #f0f4f8;
+      font-family: 'Orbitron', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #0d0d0d, #1a1a1a);
+      color: #fff;
     }
-    h1 {
-      color: #333;
+    header {
+      padding: 20px;
+      text-align: center;
+      background: #111;
+      border-bottom: 1px solid #333;
+    }
+    h1 { color: #ff5252; margin-bottom: 0; }
+    h3 { color: #ccc; margin-top: 10px; }
+    .tests {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      margin: 40px;
     }
     .test-card {
-      background: #fff;
-      padding: 20px;
+      background: #222;
+      border: 1px solid #333;
       border-radius: 12px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      margin-bottom: 20px;
-      max-width: 400px;
+      padding: 20px;
+      width: 300px;
+      box-shadow: 0 0 12px rgba(255, 23, 68, 0.2);
+      text-align: center;
+      transition: 0.3s ease;
     }
-    form button {
-      background: #007bff;
-      color: white;
+    .test-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 20px rgba(255, 23, 68, 0.4);
+    }
+    .test-card img {
+      max-width: 80px;
+      margin-bottom: 10px;
+    }
+    .test-card button {
+      background: #ff1744;
       border: none;
-      padding: 10px 16px;
+      color: #fff;
+      padding: 10px 20px;
       border-radius: 8px;
-      cursor: pointer;
       font-size: 16px;
+      cursor: pointer;
     }
-    form button:hover {
-      background: #0056b3;
+    .test-card button:hover {
+      background: #ff5252;
+    }
+    .section-performance {
+      padding: 50px 10vw;
+      background: #111;
+      text-align: center;
+    }
+    canvas {
+      margin-top: 20px;
+      max-width: 600px;
+      width: 100%;
     }
     .logout {
-      margin-top: 30px;
-      display: inline-block;
-      color: #555;
-      text-decoration: none;
+      color: #888;
+      display: block;
+      text-align: center;
+      margin: 30px;
     }
     .logout:hover {
       text-decoration: underline;
@@ -43,30 +79,65 @@
   </style>
 </head>
 <body>
-  <h1>🎯 Welcome, {{ username }}</h1>
-  <h3>Select a Mock Test:</h3>
 
+<header>
+  <h1>Welcome, {{ username }}</h1>
+  <h3>Select a Mock Test to Begin</h3>
+</header>
+
+<div class="tests">
   <div class="test-card">
+    <img src="/static/images/jee1.png" alt="JEE 1">
     <form action="{{ url_for('start_test') }}" method="POST">
       <input type="hidden" name="test_id" value="jee_paper1.csv">
-      <button type="submit">🧪 JEE Main Mock Test (Paper 1)</button>
+      <button type="submit">JEE Main Mock Test 1</button>
     </form>
   </div>
-
   <div class="test-card">
+    <img src="/static/images/jee2.png" alt="JEE 2">
     <form action="{{ url_for('start_test') }}" method="POST">
       <input type="hidden" name="test_id" value="jee_paper2.csv">
-      <button type="submit">🧪 JEE Main Mock Test (Paper 2)</button>
+      <button type="submit">JEE Main Mock Test 2</button>
     </form>
   </div>
-
   <div class="test-card">
+    <img src="/static/images/neet.png" alt="NEET">
     <form action="{{ url_for('start_test') }}" method="POST">
       <input type="hidden" name="test_id" value="neet_mock1.csv">
-      <button type="submit">🧪 NEET Mock Test 1</button>
+      <button type="submit">NEET Mock Test 1</button>
     </form>
   </div>
+</div>
 
-  <a class="logout" href="/logout">🚪 Logout</a>
+<section class="section-performance">
+  <h2>📊 Your Performance Summary</h2>
+  <canvas id="performanceChart"></canvas>
+</section>
+
+<a class="logout" href="/logout">🚪 Logout</a>
+
+<script>
+  const ctx = document.getElementById('performanceChart').getContext('2d');
+  const chart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Physics', 'Chemistry', 'Math'],
+      datasets: [{
+        label: 'Scores (out of 100)',
+        data: [{{ physics_score }}, {{ chemistry_score }}, {{ math_score }}],
+        backgroundColor: ['#ff5252', '#ff8a65', '#ffd740']
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+          max: 100
+        }
+      }
+    }
+  });
+</script>
+
 </body>
 </html>
