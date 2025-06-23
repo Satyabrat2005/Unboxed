@@ -5,21 +5,21 @@
   <title>Welcome to Unboxed</title>
   <meta name="theme-color" content="#000000" />
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet" />
-  <script src="https://unpkg.com/scrollreveal"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css" />
 
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    html {
-      scroll-snap-type: y mandatory;
+    html, body {
       scroll-behavior: smooth;
+      background: #0a0114;
+      color: #fff;
+      font-family: 'Orbitron', sans-serif;
+      overflow-x: hidden;
     }
 
     body {
-      font-family: 'Orbitron', sans-serif;
-      background: #0a0114;
-      color: #fff;
-      overflow-x: hidden;
+      position: relative;
     }
 
     header {
@@ -55,21 +55,14 @@
     }
 
     section {
-      height: 100vh;
+      min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-direction: column;
       text-align: center;
       scroll-snap-align: start;
-      opacity: 0;
-      transform: translateY(30px);
-      transition: all 0.8s ease;
-    }
-
-    section.active {
-      opacity: 1;
-      transform: translateY(0);
+      padding: 6rem 2rem 2rem;
     }
 
     .floating-title {
@@ -83,7 +76,7 @@
 
     .floating-line {
       display: flex;
-      gap: 0.2em;
+      gap: 0.3em;
       justify-content: center;
       margin-top: 1rem;
       font-size: 2.2vw;
@@ -105,7 +98,6 @@
       margin-top: 1rem;
     }
 
-    /* Gradient backgrounds */
     .bg-u { background: linear-gradient(135deg, #0a0114, #180028); }
     .bg-n { background: linear-gradient(135deg, #180028, #24002f); }
     .bg-b { background: linear-gradient(135deg, #24002f, #2f0040); }
@@ -113,6 +105,16 @@
     .bg-x { background: linear-gradient(135deg, #3a0052, #44005e); }
     .bg-e { background: linear-gradient(135deg, #44005e, #52006f); }
     .bg-d { background: linear-gradient(135deg, #52006f, #5f0080); }
+
+    .c-direction-block {
+      margin-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      text-align: center;
+      font-size: 1.5vw;
+      color: #ffd6f5;
+    }
 
     .features-section {
       background: #13001a;
@@ -148,168 +150,149 @@
       transform: translateY(-8px);
       box-shadow: 0 0 20px rgba(255, 75, 145, 0.4);
     }
-
-    .reveal { visibility: hidden; }
   </style>
 </head>
 <body>
 
-  <header>
-    <div class="logo">UNBOXED</div>
-    <nav>
-      <a href="#U">About</a>
-      <a href="#B">Features</a>
-      <a href="#X">X-Factor</a>
-      <a href="/login">Login</a>
-      <a href="/register">Register</a>
-    </nav>
-  </header>
+  <!-- ✅ Scroll container wrapper -->
+  <div data-scroll-container>
 
-  <!-- Main UNBOXED Animation -->
-  <section class="bg-u active">
-    <div class="floating-title">
-      <span data-scroll data-scroll-delay="0.14" data-scroll-speed="6">U</span>
-      <span data-scroll data-scroll-delay="0.13" data-scroll-speed="6">N</span>
-      <span data-scroll data-scroll-delay="0.12" data-scroll-speed="6">B</span>
-      <span data-scroll data-scroll-delay="0.11" data-scroll-speed="6">O</span>
-      <span data-scroll data-scroll-delay="0.10" data-scroll-speed="6">X</span>
-      <span data-scroll data-scroll-delay="0.09" data-scroll-speed="6">E</span>
-      <span data-scroll data-scroll-delay="0.08" data-scroll-speed="6">D</span>
-    </div>
-    <div class="floating-line">
-      <span data-scroll data-scroll-speed="2">U</span>
-      <span data-scroll data-scroll-speed="2">nlock</span>
-      <span data-scroll data-scroll-speed="2">your</span>
-      <span data-scroll data-scroll-speed="2">learning</span>
-      <span data-scroll data-scroll-speed="2">power.</span>
-    </div>
-  </section>
+    <!-- Header -->
+    <header>
+      <div class="logo">UNBOXED</div>
+      <nav>
+        <a href="#U">About</a>
+        <a href="#B">Features</a>
+        <a href="#X">X-Factor</a>
+        <a href="/login">Login</a>
+        <a href="/register">Register</a>
+      </nav>
+    </header>
 
-  <!-- Letter Sections -->
-  <section id="U" class="bg-u">
-    <div class="floating-title">
-      <span data-scroll data-scroll-delay="0.1" data-scroll-speed="5">U</span>
-    </div>
-    <div class="floating-line">
-      <span data-scroll data-scroll-speed="2">Understanding</span>
-      <span data-scroll data-scroll-speed="1">drives</span>
-      <span data-scroll data-scroll-speed="1">everything.</span>
-    </div>
-    <div class="keyword reveal">= Understanding</div>
-    <div class="description reveal">We help you understand your strengths and weaknesses through deep insights.</div>
-  </section>
-
-  <section id="N" class="bg-n">
-    <div class="floating-title">
-      <span data-scroll data-scroll-delay="0.1" data-scroll-speed="5">N</span>
-    </div>
-    <div class="floating-line">
-      <span data-scroll data-scroll-speed="2">Navigate</span>
-      <span data-scroll data-scroll-speed="1">smarter,</span>
-      <span data-scroll data-scroll-speed="1">not harder.</span>
-    </div>
-    <div class="keyword reveal">= Navigation</div>
-    <div class="description reveal">Smooth navigation through concepts and subjects using AI-generated paths.</div>
-  </section>
-
-  <section id="B" class="bg-b">
-    <div class="floating-title">
-      <span data-scroll data-scroll-delay="0.1" data-scroll-speed="5">B</span>
-    </div>
-    <div class="floating-line">
-      <span data-scroll data-scroll-speed="2">Brilliance</span>
-      <span data-scroll data-scroll-speed="1">built</span>
-      <span data-scroll data-scroll-speed="1">through practice.</span>
-    </div>
-    <div class="keyword reveal">= Brilliance</div>
-    <div class="description reveal">Nurture brilliance through repeated testing, feedback, and improvement.</div>
-  </section>
-
-  <!-- Add remaining sections similarly -->
-  <!-- O -->
-  <section id="O" class="bg-o">
-    <div class="floating-title"><span data-scroll data-scroll-delay="0.1" data-scroll-speed="5">O</span></div>
-    <div class="floating-line">
-      <span data-scroll data-scroll-speed="2">Optimize</span>
-      <span data-scroll data-scroll-speed="1">for</span>
-      <span data-scroll data-scroll-speed="1">maximum output.</span>
-    </div>
-    <div class="keyword reveal">= Optimization</div>
-    <div class="description reveal">Optimize your learning path using data-driven feedback and performance history.</div>
-  </section>
-
-  <!-- X -->
-  <section id="X" class="bg-x">
-    <div class="floating-title"><span data-scroll data-scroll-delay="0.1" data-scroll-speed="5">X</span></div>
-    <div class="floating-line">
-      <span data-scroll data-scroll-speed="2">Your</span>
-      <span data-scroll data-scroll-speed="1">X-Factor</span>
-      <span data-scroll data-scroll-speed="1">is your edge.</span>
-    </div>
-    <div class="keyword reveal">= X-Factor</div>
-    <div class="description reveal">You bring the X-factor. We help you amplify it with strategy and insight.</div>
-  </section>
-
-  <!-- E -->
-  <section id="E" class="bg-e">
-    <div class="floating-title"><span data-scroll data-scroll-delay="0.1" data-scroll-speed="5">E</span></div>
-    <div class="floating-line">
-      <span data-scroll data-scroll-speed="2">Execute</span>
-      <span data-scroll data-scroll-speed="1">with</span>
-      <span data-scroll data-scroll-speed="1">precision.</span>
-    </div>
-    <div class="keyword reveal">= Execution</div>
-    <div class="description reveal">Take your preparation to execution mode with mock exams and results tracking.</div>
-  </section>
-
-  <!-- D -->
-  <section id="D" class="bg-d">
-    <div class="floating-title"><span data-scroll data-scroll-delay="0.1" data-scroll-speed="5">D</span></div>
-    <div class="floating-line">
-      <span data-scroll data-scroll-speed="2">Dedication</span>
-      <span data-scroll data-scroll-speed="1">creates</span>
-      <span data-scroll data-scroll-speed="1">results.</span>
-    </div>
-    <div class="keyword reveal">= Dedication</div>
-    <div class="description reveal">Consistent effort and smart strategy — we reward your dedication.</div>
-  </section>
-
-  <!-- Features -->
-  <section class="features-section reveal">
-    <h2>⚡ Key Features</h2>
-    <div class="features-container">
-      <div class="feature-card reveal">
-        <h3>AI Mock Engine</h3>
-        <p>Dynamic mock tests personalized to your progress level.</p>
+    <!-- Sections -->
+    <section id="U" class="bg-u" data-scroll-section>
+      <div class="floating-title"><span data-scroll data-scroll-delay="0.1" data-scroll-speed="5">U</span></div>
+      <div class="floating-line">
+        <span data-scroll data-scroll-speed="2">Understanding</span>
+        <span data-scroll data-scroll-speed="1">drives</span>
+        <span data-scroll data-scroll-speed="1">everything.</span>
       </div>
-      <div class="feature-card reveal">
-        <h3>Instant Feedback</h3>
-        <p>Track weaknesses and strengths across every quiz you take.</p>
+      <div class="c-direction-block" id="dir-U">
+        <div><span data-scroll data-scroll-direction="horizontal" data-scroll-speed="8" data-scroll-target="#dir-U">Unlock potential.</span></div>
+        <div><span data-scroll data-scroll-direction="horizontal" data-scroll-speed="-10" data-scroll-target="#dir-U">Understand deeply.</span></div>
       </div>
-      <div class="feature-card reveal">
-        <h3>Timer & Leaderboard</h3>
-        <p>Compete in timed tests and view your ranking in real-time.</p>
-      </div>
-      <div class="feature-card reveal">
-        <h3>Interactive Dashboard</h3>
-        <p>Beautiful, intuitive UI to motivate and organize your study goals.</p>
-      </div>
-    </div>
-  </section>
+      <div class="keyword">= Understanding</div>
+      <div class="description">We help you understand your strengths and weaknesses through deep insights.</div>
+    </section>
 
+    <section id="N" class="bg-n" data-scroll-section>
+      <div class="floating-title"><span data-scroll data-scroll-delay="0.1" data-scroll-speed="5">N</span></div>
+      <div class="floating-line">
+        <span data-scroll data-scroll-speed="2">Navigate</span>
+        <span data-scroll data-scroll-speed="1">smarter,</span>
+        <span data-scroll data-scroll-speed="1">not harder.</span>
+      </div>
+      <div class="c-direction-block" id="dir-N">
+        <div><span data-scroll data-scroll-direction="horizontal" data-scroll-speed="7" data-scroll-target="#dir-N">AI-guided learning.</span></div>
+        <div><span data-scroll data-scroll-direction="horizontal" data-scroll-speed="-9" data-scroll-target="#dir-N">Smooth paths always.</span></div>
+      </div>
+      <div class="keyword">= Navigation</div>
+      <div class="description">Smooth navigation through concepts and subjects using AI-generated paths.</div>
+    </section>
+
+    <section id="B" class="bg-b" data-scroll-section>
+      <div class="floating-title"><span data-scroll data-scroll-delay="0.1" data-scroll-speed="5">B</span></div>
+      <div class="floating-line">
+        <span data-scroll data-scroll-speed="2">Brilliance</span>
+        <span data-scroll data-scroll-speed="1">built</span>
+        <span data-scroll data-scroll-speed="1">through practice.</span>
+      </div>
+      <div class="c-direction-block" id="dir-B">
+        <div><span data-scroll data-scroll-direction="horizontal" data-scroll-speed="6" data-scroll-target="#dir-B">Repeat. Improve.</span></div>
+        <div><span data-scroll data-scroll-direction="horizontal" data-scroll-speed="-7" data-scroll-target="#dir-B">Shine brighter.</span></div>
+      </div>
+      <div class="keyword">= Brilliance</div>
+      <div class="description">Nurture brilliance through repeated testing, feedback, and improvement.</div>
+    </section>
+
+    <section id="O" class="bg-o" data-scroll-section>
+      <div class="floating-title"><span data-scroll data-scroll-delay="0.1" data-scroll-speed="5">O</span></div>
+      <div class="floating-line">
+        <span data-scroll data-scroll-speed="2">Optimize</span>
+        <span data-scroll data-scroll-speed="1">for</span>
+        <span data-scroll data-scroll-speed="1">maximum output.</span>
+      </div>
+      <div class="keyword">= Optimization</div>
+      <div class="description">Optimize your learning path using data-driven feedback and performance history.</div>
+    </section>
+
+    <section id="X" class="bg-x" data-scroll-section>
+      <div class="floating-title"><span data-scroll data-scroll-delay="0.1" data-scroll-speed="5">X</span></div>
+      <div class="floating-line">
+        <span data-scroll data-scroll-speed="2">Your</span>
+        <span data-scroll data-scroll-speed="1">X-Factor</span>
+        <span data-scroll data-scroll-speed="1">is your edge.</span>
+      </div>
+      <div class="keyword">= X-Factor</div>
+      <div class="description">You bring the X-factor. We help you amplify it with strategy and insight.</div>
+    </section>
+
+    <section id="E" class="bg-e" data-scroll-section>
+      <div class="floating-title"><span data-scroll data-scroll-delay="0.1" data-scroll-speed="5">E</span></div>
+      <div class="floating-line">
+        <span data-scroll data-scroll-speed="2">Execute</span>
+        <span data-scroll data-scroll-speed="1">with</span>
+        <span data-scroll data-scroll-speed="1">precision.</span>
+      </div>
+      <div class="keyword">= Execution</div>
+      <div class="description">Take your preparation to execution mode with mock exams and results tracking.</div>
+    </section>
+
+    <section id="D" class="bg-d" data-scroll-section>
+      <div class="floating-title"><span data-scroll data-scroll-delay="0.1" data-scroll-speed="5">D</span></div>
+      <div class="floating-line">
+        <span data-scroll data-scroll-speed="2">Dedication</span>
+        <span data-scroll data-scroll-speed="1">creates</span>
+        <span data-scroll data-scroll-speed="1">results.</span>
+      </div>
+      <div class="keyword">= Dedication</div>
+      <div class="description">Consistent effort and smart strategy — we reward your dedication.</div>
+    </section>
+
+    <!-- Features -->
+    <section class="features-section reveal" data-scroll-section>
+      <h2>⚡ Key Features</h2>
+      <div class="features-container">
+        <div class="feature-card reveal">
+          <h3>AI Mock Engine</h3>
+          <p>Dynamic mock tests personalized to your progress level.</p>
+        </div>
+        <div class="feature-card reveal">
+          <h3>Instant Feedback</h3>
+          <p>Track weaknesses and strengths across every quiz you take.</p>
+        </div>
+        <div class="feature-card reveal">
+          <h3>Timer & Leaderboard</h3>
+          <p>Compete in timed tests and view your ranking in real-time.</p>
+        </div>
+        <div class="feature-card reveal">
+          <h3>Interactive Dashboard</h3>
+          <p>Beautiful, intuitive UI to motivate and organize your study goals.</p>
+        </div>
+      </div>
+    </section>
+
+  </div> <!-- end of scroll container -->
+
+  <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
+  <script src="https://unpkg.com/scrollreveal"></script>
   <script>
-    // Activate sections on scroll
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add('active');
-      });
-    }, { threshold: 0.2 });
-
-    document.querySelectorAll('section').forEach(section => {
-      observer.observe(section);
+    const scroll = new LocomotiveScroll({
+      el: document.querySelector('[data-scroll-container]'),
+      smooth: true,
+      lerp: 0.08
     });
 
-    // Reveal elements with ScrollReveal
     ScrollReveal().reveal('.reveal', {
       distance: '40px',
       duration: 900,
@@ -318,7 +301,8 @@
       interval: 100,
       reset: false
     });
-  </script>
 
+    window.addEventListener('load', () => scroll.update());
+  </script>
 </body>
 </html>
