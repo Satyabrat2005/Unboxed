@@ -1,12 +1,103 @@
 <!DOCTYPE html>
-<html>
-<head><title>Login</title></head>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login | UNBOXED</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.10.2/lottie.min.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body, html {
+      height: 100%; font-family: 'Orbitron', sans-serif; overflow: hidden;
+      background: radial-gradient(circle, #0c0011, #200016, #300000);
+      color: white; position: relative;
+    }
+    #particles-js { position: absolute; width: 100%; height: 100%; z-index: 0; }
+    .container {
+      position: relative; z-index: 2;
+      background: rgba(255,255,255,0.05); backdrop-filter: blur(12px);
+      padding: 40px; border-radius: 20px;
+      box-shadow: 0 0 40px rgba(255,23,68,0.4);
+      width: 360px; text-align: center;
+      animation: fadeIn 1s ease;
+      margin: auto; top: 50%; transform: translateY(-50%);
+    }
+    h2 { margin-bottom: 25px; color: #ff1744; font-size: 30px; }
+    input {
+      width: 100%; padding: 14px; margin: 10px 0;
+      border: none; border-radius: 10px;
+      background: rgba(255,255,255,0.07);
+      color: white; font-size: 16px;
+      outline: none; transition: 0.3s;
+    }
+    input:focus { background: rgba(255,255,255,0.1); box-shadow: 0 0 6px #ff1744; }
+    button {
+      width: 100%; background: #ff1744; border: none;
+      padding: 14px; font-size: 16px;
+      color: white; border-radius: 10px;
+      cursor: pointer; transition: 0.3s ease;
+      margin-top: 15px;
+    }
+    button:hover {
+      background: #ff002f;
+      box-shadow: 0 0 12px #ff1744; transform: scale(1.03);
+    }
+    .back-link {
+      display: block; margin-top: 25px;
+      color: #bbb; font-size: 14px;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .back-link:hover { color: white; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    #lottie { width: 120px; height: 120px; margin: 0 auto; }
+  </style>
+</head>
 <body>
-  <h2>🔐 Login</h2>
-  <form method="POST" action="/login">
-    <input type="email" name="email" placeholder="Email" required><br>
-    <input type="password" name="password" placeholder="Password" required><br>
-    <button type="submit">Login</button>
-  </form>
+
+  <div id="particles-js"></div>
+
+  <div class="container">
+    <div id="lottie"></div>
+    <h2>🔐 Login</h2>
+    <form method="POST" action="/login">
+      <input type="email" name="email" placeholder="Email Address" required>
+      <input type="password" name="password" placeholder="Password" required>
+      <button type="submit">🔥 Enter the Arena</button>
+    </form>
+    <a href="/register" class="back-link">👤 Don't have an account? Register →</a>
+  </div>
+
+  <script>
+    // 🎯 Particle background
+    tsParticles.load("particles-js", {
+      particles: {
+        number: { value: 60 },
+        color: { value: "#ff1744" },
+        shape: { type: "circle" },
+        opacity: { value: 0.3 },
+        size: { value: 3 },
+        move: { enable: true, speed: 1 }
+      },
+      interactivity: {
+        events: { onhover: { enable: true, mode: "repulse" } }
+      },
+      background: { color: "#0c0011" }
+    });
+
+    // 🎯 Lottie logo animation
+    lottie.loadAnimation({
+      container: document.getElementById('lottie'),
+      renderer: 'svg',
+      loop: true,
+      autoplay: true,
+      path: '/static/animations/devil-logo.json'
+    });
+  </script>
+
 </body>
 </html>
