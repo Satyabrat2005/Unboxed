@@ -5,7 +5,6 @@
   <title>Login | UNBOXED</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.10.2/lottie.min.js"></script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body, html {
@@ -23,6 +22,28 @@
       animation: fadeIn 1s ease;
       margin: auto; top: 50%; transform: translateY(-50%);
     }
+
+    /* UNBOXED logo styling */
+    .unboxed-logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 36px;
+      color: white;
+      letter-spacing: 2px;
+      margin-bottom: 20px;
+    }
+    .unboxed-logo span {
+      display: inline-block;
+      transition: all 0.3s ease;
+      cursor: default;
+    }
+    .unboxed-logo span:nth-child(1):hover { color: #ff1744; text-shadow: 0 0 8px #ff1744; } /* U */
+    .unboxed-logo span:nth-child(2):hover { color: #ff9100; text-shadow: 0 0 8px #ff9100; } /* N */
+    .unboxed-logo span:nth-child(3):hover { color: #ffea00; text-shadow: 0 0 8px #ffea00; } /* B */
+    .unboxed-logo span:nth-child(4):hover { color: #00e676; text-shadow: 0 0 8px #00e676; } /* O */
+    .unboxed-logo span:nth-child(5):hover { color: #2979ff; text-shadow: 0 0 8px #2979ff; } /* X */
+    .unboxed-logo span:nth-child(6):hover { color: #d500f9; text-shadow: 0 0 8px #d500f9; } /* E */
+    .unboxed-logo span:nth-child(7):hover { color: #ff4081; text-shadow: 0 0 8px #ff4081; } /* D */
+
     h2 { margin-bottom: 25px; color: #ff1744; font-size: 30px; }
     input {
       width: 100%; padding: 14px; margin: 10px 0;
@@ -54,7 +75,6 @@
       from { opacity: 0; transform: translateY(20px); }
       to   { opacity: 1; transform: translateY(0); }
     }
-    #lottie { width: 120px; height: 120px; margin: 0 auto; }
   </style>
 </head>
 <body>
@@ -62,7 +82,11 @@
   <div id="particles-js"></div>
 
   <div class="container">
-    <div id="lottie"></div>
+    <!-- UNBOXED Logo -->
+    <h1 class="unboxed-logo">
+      <span>U</span><span>N</span><span>B</span><span>O</span><span>X</span><span>E</span><span>D</span>
+    </h1>
+
     <h2>🔐 Login</h2>
     <form method="POST" action="/login">
       <input type="email" name="email" placeholder="Email Address" required>
@@ -87,15 +111,6 @@
         events: { onhover: { enable: true, mode: "repulse" } }
       },
       background: { color: "#0c0011" }
-    });
-
-    // 🎯 Lottie logo animation
-    lottie.loadAnimation({
-      container: document.getElementById('lottie'),
-      renderer: 'svg',
-      loop: true,
-      autoplay: true,
-      path: '/static/animations/devil-logo.json'
     });
   </script>
 
