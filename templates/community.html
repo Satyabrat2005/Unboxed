@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>UNBOXED Community</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet"/>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Orbitron', sans-serif;
+      background: #0b0a1e; /* Deep blackish-purple */
+      color: #f5f5f5;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      text-align: center;
+      padding: 1.5rem;
+      background: #140c2c;
+      font-size: 2rem;
+      font-weight: bold;
+      color: #a78bfa; /* Soft purple */
+      box-shadow: 0 2px 10px #5b21b6;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      padding: 1rem;
+      background: #1a132f;
+    }
+
+    nav a {
+      color: #c4b5fd;
+      text-decoration: none;
+      background: #29203c;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      transition: background 0.3s;
+    }
+
+    nav a:hover {
+      background: #7c3aed;
+      color: #fff;
+    }
+
+    .section {
+      padding: 2rem;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .section h2 {
+      color: #a78bfa;
+      margin-bottom: 1rem;
+      font-size: 1.6rem;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: #1a152b;
+      padding: 1.2rem;
+      border-radius: 12px;
+      box-shadow: 0 0 14px rgba(124, 58, 237, 0.25);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
+    }
+
+    .card h3 {
+      color: #ddd6fe;
+      margin-bottom: 0.5rem;
+    }
+
+    .card p {
+      color: #e0e7ff;
+    }
+
+    .join-btn {
+      display: inline-block;
+      margin-top: 2rem;
+      background: #7c3aed;
+      color: #fff;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: background 0.3s ease;
+    }
+
+    .join-btn:hover {
+      background: #a78bfa;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: #12091c;
+      color: #a1a1aa;
+      font-size: 0.9rem;
+      margin-top: auto;
+    }
+
+    @media (max-width: 600px) {
+      nav {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>UNBOXED Community</header>
+
+  <nav>
+    <a href="groups.html" target="_blank">Join Groups</a>
+    <a href="#qa">AI Q&A</a>
+    <a href="#updates">Quick Updates</a>
+    <a href="#threads">Threads</a>
+  </nav>
+
+  <section class="section" id="qa">
+    <h2>📘 AI Q&A</h2>
+    <div class="card-grid">
+      <div class="card">
+        <h3>@Alice</h3>
+        <p>How to optimize mock timing?</p>
+      </div>
+      <div class="card">
+        <h3>@Bob</h3>
+        <p>Any shortcut for binary trees in DSA?</p>
+      </div>
+      <div class="card">
+        <h3>@Cara</h3>
+        <p>Tips for exam day 📝</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="updates">
+    <h2>🌟 Quick Updates</h2>
+    <div class="card-grid">
+      <div class="card">
+        <p>🚀 New AI contest launching next week!</p>
+      </div>
+      <div class="card">
+        <p>🔧 Website maintenance scheduled for Friday.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="threads">
+    <h2>🧠 Community Threads</h2>
+    <div class="card-grid">
+      <div class="card">
+        <h3>#AI_Chatbots</h3>
+        <p>Share how you’re building chatbots with LLMs</p>
+      </div>
+      <div class="card">
+        <h3>#ExamTips</h3>
+        <p>All your best advice to crack competitive exams</p>
+      </div>
+    </div>
+    <a href="groups.html" target="_blank" class="join-btn">Join Groups</a>
+  </section>
+
+  <footer>
+    &copy; 2025 UNBOXED Community. All rights reserved.
+  </footer>
+</body>
+</html>
